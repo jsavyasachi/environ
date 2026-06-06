@@ -1,4 +1,4 @@
-(defproject net.clojars.savya/lein-environ "1.3.0"
+(defproject net.clojars.savya/lein-environ "1.4.0"
   :description "Leiningen plugin for Environ"
   :url "https://github.com/jsavyasachi/environ"
   :scm {:dir ".."}
