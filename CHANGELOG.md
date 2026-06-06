@@ -1,3 +1,14 @@
+## 1.4.0 (2026-06-06)
+
+* Make `environ.core/read-env` public so callers can re-read the live
+  environment at runtime (the `env` map is fixed at load/build time, which
+  matters under GraalVM native-image)
+* Verify Babashka compatibility; add a bb smoke test (`bb run test:bb`) to CI
+* Add a `deps.edn` so the core is usable as a git/`:local/root` dependency and
+  with tools.build
+* Add clj-kondo linting in CI; modernize `ns` forms (`:use` -> `:require`,
+  drop `:refer :all`) and resolve all lint findings
+
 ## 1.3.0 (2026-06-06)
 
 Maintenance fork, published to Clojars as `net.clojars.savya/environ` and

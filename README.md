@@ -3,6 +3,7 @@
 [![Clojars Project](https://img.shields.io/clojars/v/net.clojars.savya/environ.svg)](https://clojars.org/net.clojars.savya/environ)
 [![lein-environ](https://img.shields.io/clojars/v/net.clojars.savya/lein-environ.svg?label=lein-environ)](https://clojars.org/net.clojars.savya/lein-environ)
 [![test](https://github.com/jsavyasachi/environ/actions/workflows/test.yml/badge.svg)](https://github.com/jsavyasachi/environ/actions/workflows/test.yml)
+[![cljdoc](https://cljdoc.org/badge/net.clojars.savya/environ)](https://cljdoc.org/d/net.clojars.savya/environ)
 
 Environ is a Clojure library for managing environment settings from a
 number of different sources. It works well for applications following
@@ -33,20 +34,20 @@ Add the core library to your dependencies.
 Leiningen (`project.clj`):
 
 ```clojure
-:dependencies [[net.clojars.savya/environ "1.3.0"]]
+:dependencies [[net.clojars.savya/environ "1.4.0"]]
 ```
 
 tools.deps (`deps.edn`):
 
 ```clojure
-net.clojars.savya/environ {:mvn/version "1.3.0"}
+net.clojars.savya/environ {:mvn/version "1.4.0"}
 ```
 
 If you want to be able to draw settings from the Leiningen project
 map, you'll also need the plugin:
 
 ```clojure
-:plugins [[net.clojars.savya/lein-environ "1.3.0"]]
+:plugins [[net.clojars.savya/lein-environ "1.4.0"]]
 ```
 
 > **Note:** the Boot plugin (`boot-environ`) is unmaintained and is not
@@ -133,10 +134,30 @@ both converted to the same keyword `:database-url`.
 
 [lein-pprint]: https://github.com/technomancy/leiningen/tree/master/lein-pprint
 
-*Important* -- environ will not pick up configuration settings from the 
-`project.clj` when called from a compiled uberjar. So for any compiled 
-code you produce with `lein uberjar`, you will want to set your 
-configuration values via shell environment and/or system properties.
+## Load time vs. runtime
+
+The `env` map is read **once, when `environ.core` loads**. For ordinary JVM
+apps that is fine. Two cases need care:
+
+* **Compiled uberjars** -- environ does not pick up settings from `project.clj`
+  in a `lein uberjar`. Supply values via shell environment and/or system
+  properties instead.
+* **GraalVM native-image** -- namespace load happens at *build* time, so the
+  `env` map would otherwise capture the build machine's environment and ignore
+  the runtime one. Call `(environ.core/read-env)` to re-read the live
+  environment at runtime:
+
+  ```clojure
+  (require '[environ.core :as environ])
+  (environ/read-env)   ;; => fresh map from env vars + system properties
+  ```
+
+## Babashka
+
+The core library is `.cljc` and loads under [Babashka](https://babashka.org/),
+so code shared between the JVM and bb keeps working. (For bb scripts that only
+need a couple of variables, `System/getenv` is usually enough -- environ earns
+its keep mainly through the Leiningen `:env` integration above.)
 
 ## License
 
