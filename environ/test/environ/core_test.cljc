@@ -1,17 +1,11 @@
 (ns environ.core-test
-  (:require #?(:clj [clojure.java.io :as io])
-            #?(:cljs [goog.object :as obj])
+  (:require #?(:cljs [goog.object :as obj])
             [clojure.test :refer [deftest is testing]]
             [environ.core :as environ]))
 
 #?(:cljs (def nodejs? (exists? js/require)))
 #?(:cljs (def fs (when nodejs? (js/require "fs"))))
 #?(:cljs (def process (when nodejs? (js/require "process"))))
-
-(defn- delete-file [f]
-  #?(:clj (.delete (io/file f))
-     :cljs (when (.existsSync fs f)
-             (.unlinkSync fs f))))
 
 (defn- get-env [x]
   #?(:clj (System/getenv x)
@@ -62,3 +56,16 @@
           (is (= (:bar env) ":baz")))))
     (testing "non Node.js environment"
       (is (= environ/env {})))))
+
+#?(:clj
+   (deftest test-read-env-runtime
+     (testing "read-env re-reads the environment at call time"
+       ;; env vars are immutable in a running JVM, but system properties are
+       ;; not - so a property set after namespace load proves read-env reflects
+       ;; the live environment (the affordance native-image apps need, since
+       ;; the `env` defonce is fixed at load/build time).
+       (System/setProperty "environ.runtime.test" "live")
+       (try
+         (is (= "live" (:environ-runtime-test (environ/read-env))))
+         (finally
+           (System/clearProperty "environ.runtime.test"))))))

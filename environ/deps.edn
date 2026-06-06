@@ -1,0 +1,7 @@
+;; tools.deps coordinates for consumers using this as a git or :local/root dep.
+;; Published artifact: net.clojars.savya/environ {:mvn/version "1.4.0"}
+{:paths ["src"]
+ :deps {}
+ :aliases
+ {;; ClojureScript provided for cljs consumers/builds.
+  :cljs {:extra-deps {org.clojure/clojurescript {:mvn/version "1.11.132"}}}}}

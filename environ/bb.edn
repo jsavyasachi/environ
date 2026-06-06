@@ -1,0 +1,4 @@
+{:paths ["src"]
+ :tasks
+ {test:bb {:doc "Babashka smoke test: load environ and read the environment under bb."
+           :task (shell {:extra-env {"FOO_BAR" "baz"}} "bb -cp src script/bb_smoke.clj")}}}

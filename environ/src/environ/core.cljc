@@ -21,7 +21,7 @@
 
 (defn- sanitize-key [k]
   (let [s (keywordize (name k))]
-    (if-not (= k s) (println "Warning: environ key" k "has been corrected to" s))
+    (when-not (= k s) (println "Warning: environ key" k "has been corrected to" s))
     s))
 
 (defn- sanitize-val [k v]
@@ -65,7 +65,13 @@
   (warn-on-overwrite ms)
   (apply merge ms))
 
-(defn- read-env []
+(defn read-env
+  "Read and return the environment map from all sources at call time.
+
+  `env` is read once when this namespace loads, which is fixed at *build*
+  time under GraalVM native-image (and at uberjar build for compiled code).
+  Call `read-env` instead to re-read the live environment at runtime."
+  []
   #?(:clj (merge-env
            (read-env-file ".lein-env")
            (read-env-file (io/resource ".boot-env"))
