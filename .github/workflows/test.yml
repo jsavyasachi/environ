@@ -74,3 +74,24 @@ jobs:
           restore-keys: m2-
       - run: lein test
         working-directory: lein-environ
+
+  babashka:
+    name: "core: Babashka"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeLaGuardo/setup-clojure@13.4
+        with:
+          bb: latest
+      - run: bb run test:bb
+        working-directory: environ
+
+  lint:
+    name: "clj-kondo"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeLaGuardo/setup-clojure@13.4
+        with:
+          clj-kondo: latest
+      - run: clj-kondo --lint environ/src lein-environ/src environ/test lein-environ/test
