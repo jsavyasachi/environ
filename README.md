@@ -1,8 +1,16 @@
 # Environ
 
+[![Clojars Project](https://img.shields.io/clojars/v/net.clojars.savya/environ.svg)](https://clojars.org/net.clojars.savya/environ)
+[![lein-environ](https://img.shields.io/clojars/v/net.clojars.savya/lein-environ.svg?label=lein-environ)](https://clojars.org/net.clojars.savya/lein-environ)
+[![test](https://github.com/jsavyasachi/environ/actions/workflows/test.yml/badge.svg)](https://github.com/jsavyasachi/environ/actions/workflows/test.yml)
+
 Environ is a Clojure library for managing environment settings from a
 number of different sources. It works well for applications following
 the [12 Factor App](http://12factor.net/) pattern.
+
+> Maintenance fork of [weavejester/environ](https://github.com/weavejester/environ),
+> modernized for current JDK/Clojure/ClojureScript and published to Clojars as
+> `net.clojars.savya/environ`.
 
 Currently, Environ supports four sources, resolved in the following
 order:
@@ -20,17 +28,25 @@ classpath if present (e.g. when produced by an external Boot task).
 
 ## Installation
 
-Include the following dependency in your `project.clj` file:
+Add the core library to your dependencies.
+
+Leiningen (`project.clj`):
 
 ```clojure
-:dependencies [[environ "1.2.0"]]
+:dependencies [[net.clojars.savya/environ "1.3.0"]]
+```
+
+tools.deps (`deps.edn`):
+
+```clojure
+net.clojars.savya/environ {:mvn/version "1.3.0"}
 ```
 
 If you want to be able to draw settings from the Leiningen project
-map, you'll also need the following plugin:
+map, you'll also need the plugin:
 
 ```clojure
-:plugins [[lein-environ "1.2.0"]]
+:plugins [[net.clojars.savya/lein-environ "1.3.0"]]
 ```
 
 > **Note:** the Boot plugin (`boot-environ`) is unmaintained and is not
@@ -125,5 +141,8 @@ configuration values via shell environment and/or system properties.
 ## License
 
 Copyright © 2020 James Reeves
+
+Maintenance fork © 2026 Savyasachi. Original:
+https://github.com/weavejester/environ
 
 Distributed under the Eclipse Public License, the same as Clojure.

@@ -1,7 +1,17 @@
 ## 1.3.0 (2026-06-06)
 
+Maintenance fork, published to Clojars as `net.clojars.savya/environ` and
+`net.clojars.savya/lein-environ`.
+
+* Verified on JDK 8/11/17/21 and Clojure 1.10/1.11/1.12 via GitHub Actions CI
+* Drop the Nashorn ClojureScript test target (Nashorn was removed in JDK 15);
+  ClojureScript is now tested on Node
+* Bump ClojureScript 1.10.439 -> 1.11.132, lein-cljsbuild 1.1.7 -> 1.1.8,
+  lein-doo 0.1.10 -> 0.1.11
+* Enable `*warn-on-reflection*`; core is reflection-clean
 * Remove the unmaintained boot-environ module (Boot toolchain is dead); the core
   still reads a `.boot-env` file from the classpath
+* Add an EPL-1.0 `LICENSE` file
 
 ## 1.2.0 (2020-05-05)
 
