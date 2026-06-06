@@ -1,6 +1,6 @@
 (ns lein-environ.plugin
-  (:use [robert.hooke :only (add-hook)])
   (:require [clojure.java.io :as io]
+            [robert.hooke :refer [add-hook]]
             leiningen.core.main))
 
 (defn- as-edn [& args]

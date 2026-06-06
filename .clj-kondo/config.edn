@@ -1,0 +1,3 @@
+{:linters
+ {;; leiningen.core.main is required for its hook side-effect, not referenced.
+  :unused-namespace {:exclude [leiningen.core.main]}}}

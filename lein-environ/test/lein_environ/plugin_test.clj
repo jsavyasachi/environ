@@ -1,5 +1,5 @@
 (ns lein-environ.plugin-test
-  (:require [clojure.test :refer :all]
+  (:require [clojure.test :refer [are deftest]]
             [lein-environ.plugin :as l]))
 
 (deftest replace-project-keyword-test
