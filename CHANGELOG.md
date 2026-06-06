@@ -1,3 +1,8 @@
+## 1.3.0 (2026-06-06)
+
+* Remove the unmaintained boot-environ module (Boot toolchain is dead); the core
+  still reads a `.boot-env` file from the classpath
+
 ## 1.2.0 (2020-05-05)
 
 * Add support for ClojureScript on node.js (#87)

@@ -12,12 +12,10 @@ order:
 3. Environment variables
 4. Java system properties
 
-The first two sources are set by the lein-environ and boot-environ
-plugins respectively, and should not be edited manually.
-
-The `.lein-env` file is populated with the content of the `:env` key
-in the Leiningen project map. The `.boot-env` file is populated by the
-`environ.boot/environ` Boot task.
+The `.lein-env` file is set by the lein-environ plugin and should not
+be edited manually. It is populated with the content of the `:env` key
+in the Leiningen project map. The `.boot-env` file is read from the
+classpath if present (e.g. when produced by an external Boot task).
 
 
 ## Installation
@@ -35,18 +33,9 @@ map, you'll also need the following plugin:
 :plugins [[lein-environ "1.2.0"]]
 ```
 
-If you are using the Boot toolchain, you may want to read and write
-settings from build pipelines. In *build.boot*, add the dependency:
-
-```clojure
-:dependencies '[[boot-environ "1.2.0"]]
-```
-
-Then require the environ boot task.
-
-```clojure
-(require '[environ.boot :refer [environ]])
-```
+> **Note:** the Boot plugin (`boot-environ`) is unmaintained and is not
+> republished in this fork. The core library still reads a `.boot-env`
+> file from the classpath, so an externally produced one keeps working.
 
 
 ## Usage
@@ -108,23 +97,6 @@ map. For example:
 This looks up the `:version` key in the Leiningen project map. You can
 view the full project map by using [lein-pprint][].
 
-In the case of Boot, you have the full flexibility of tasks and build
-pipelines, meaning that all the following are valid:
-
-```clojure
-$ boot environ -e database-url=jdbc:postgresql://localhost/dev repl
-```
-
-```clojure
-(environ :env {:database-url "jdbc:postgresql://localhost/dev"})
-```
-
-The latter form can be included in custom pipelines and `task-options!'.
-
-The task also creates or updates a `.boot-env` file in the fileset.
-This is useful for tasks that create their own pods like
-[boot-test][], which won't see changes in the environ vars.
-
 When you deploy to a production environment, you can make use of
 environment variables, like so:
 
@@ -144,7 +116,6 @@ characters "_" and "." with "-". The environment variable
 both converted to the same keyword `:database-url`.
 
 [lein-pprint]: https://github.com/technomancy/leiningen/tree/master/lein-pprint
-[boot-test]:   https://github.com/adzerk-oss/boot-test
 
 *Important* -- environ will not pick up configuration settings from the 
 `project.clj` when called from a compiled uberjar. So for any compiled 
