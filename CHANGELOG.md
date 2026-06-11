@@ -1,3 +1,8 @@
+## lein-environ 1.4.2 (2026-06-11)
+
+* Add docstrings to the public `read-env`, `env-file`, and `hooks`. No code
+  changes; `environ` core stays at 1.4.1.
+
 ## 1.4.1 (2026-06-10)
 
 * lein-environ: declare `leiningen-core` as a provided dependency so cljdoc can

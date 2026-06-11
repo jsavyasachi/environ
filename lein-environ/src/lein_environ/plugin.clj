@@ -18,15 +18,26 @@
     (project (keyword (name value)))
     value))
 
-(defn read-env [project]
+(defn read-env
+  "Returns the `:env` map from the Leiningen `project`, resolving any
+  `:project/foo` keyword values to the corresponding `:foo` key in the project
+  map."
+  [project]
   (map-vals #(replace-project-keyword % project) (:env project {})))
 
-(defn env-file [project]
+(defn env-file
+  "Returns the `.lein-env` java.io.File in the `project` root, where the resolved
+  environment is written for environ.core to read."
+  [project]
   (io/file (:root project) ".lein-env"))
 
 (defn- write-env-to-file [func task-name project args]
   (spit (env-file project) (as-edn (read-env project)))
   (func task-name project args))
 
-(defn hooks []
+(defn hooks
+  "Leiningen hook entry point, applied automatically when lein-environ is in
+  `:plugins`. Wraps `apply-task` so the resolved `:env` map is written to the
+  project's `.lein-env` file before each task runs, for environ.core to read."
+  []
   (add-hook #'leiningen.core.main/apply-task #'write-env-to-file))

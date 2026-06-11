@@ -48,7 +48,7 @@ If you want to be able to draw settings from the Leiningen project
 map, you'll also need the plugin:
 
 ```clojure
-:plugins [[net.clojars.savya/lein-environ "1.4.1"]]
+:plugins [[net.clojars.savya/lein-environ "1.4.2"]]
 ```
 
 > **Note:** the Boot plugin (`boot-environ`) is unmaintained and is not
