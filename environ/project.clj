@@ -1,4 +1,4 @@
-(defproject net.clojars.savya/environ "1.4.0"
+(defproject net.clojars.savya/environ "1.4.1"
   :description "Library for accessing environment variables"
   :url "https://github.com/jsavyasachi/environ"
   :scm {:dir ".."}

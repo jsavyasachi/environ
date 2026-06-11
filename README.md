@@ -4,6 +4,7 @@
 [![lein-environ](https://img.shields.io/clojars/v/net.clojars.savya/lein-environ.svg?label=lein-environ)](https://clojars.org/net.clojars.savya/lein-environ)
 [![test](https://github.com/jsavyasachi/environ/actions/workflows/test.yml/badge.svg)](https://github.com/jsavyasachi/environ/actions/workflows/test.yml)
 [![cljdoc](https://cljdoc.org/badge/net.clojars.savya/environ)](https://cljdoc.org/d/net.clojars.savya/environ)
+[![lein-environ cljdoc](https://cljdoc.org/badge/net.clojars.savya/lein-environ)](https://cljdoc.org/d/net.clojars.savya/lein-environ/CURRENT)
 
 Environ is a Clojure library for managing environment settings from a
 number of different sources. It works well for applications following
@@ -34,20 +35,20 @@ Add the core library to your dependencies.
 Leiningen (`project.clj`):
 
 ```clojure
-:dependencies [[net.clojars.savya/environ "1.4.0"]]
+:dependencies [[net.clojars.savya/environ "1.4.1"]]
 ```
 
 tools.deps (`deps.edn`):
 
 ```clojure
-net.clojars.savya/environ {:mvn/version "1.4.0"}
+net.clojars.savya/environ {:mvn/version "1.4.1"}
 ```
 
 If you want to be able to draw settings from the Leiningen project
 map, you'll also need the plugin:
 
 ```clojure
-:plugins [[net.clojars.savya/lein-environ "1.4.0"]]
+:plugins [[net.clojars.savya/lein-environ "1.4.1"]]
 ```
 
 > **Note:** the Boot plugin (`boot-environ`) is unmaintained and is not

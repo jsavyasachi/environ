@@ -1,3 +1,10 @@
+## 1.4.1 (2026-06-10)
+
+* lein-environ: declare `leiningen-core` as a provided dependency so cljdoc can
+  resolve the `leiningen.core.*` requires and build the plugin's API docs.
+  Provided scope is non-transitive, so dependent projects are unaffected. No
+  code changes; `environ` is released alongside to keep the versions matched.
+
 ## 1.4.0 (2026-06-06)
 
 * Make `environ.core/read-env` public so callers can re-read the live
