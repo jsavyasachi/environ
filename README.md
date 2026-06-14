@@ -2,9 +2,9 @@
 
 [![Clojars Project](https://img.shields.io/clojars/v/net.clojars.savya/environ.svg)](https://clojars.org/net.clojars.savya/environ)
 [![lein-environ](https://img.shields.io/clojars/v/net.clojars.savya/lein-environ.svg?label=lein-environ)](https://clojars.org/net.clojars.savya/lein-environ)
-[![test](https://github.com/jsavyasachi/environ/actions/workflows/test.yml/badge.svg)](https://github.com/jsavyasachi/environ/actions/workflows/test.yml)
 [![cljdoc](https://cljdoc.org/badge/net.clojars.savya/environ)](https://cljdoc.org/d/net.clojars.savya/environ)
 [![lein-environ cljdoc](https://cljdoc.org/badge/net.clojars.savya/lein-environ)](https://cljdoc.org/d/net.clojars.savya/lein-environ/CURRENT)
+[![test](https://github.com/jsavyasachi/environ/actions/workflows/test.yml/badge.svg)](https://github.com/jsavyasachi/environ/actions/workflows/test.yml)
 
 Environ is a Clojure library for managing environment settings from a
 number of different sources. It works well for applications following
