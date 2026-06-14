@@ -14,6 +14,12 @@ the [12 Factor App](http://12factor.net/) pattern.
 > modernized for current JDK/Clojure/ClojureScript and published to Clojars as
 > `net.clojars.savya/environ`.
 
+## Stack
+
+<a href="https://clojure.org"><img src="https://img.shields.io/badge/Clojure-5881D8?style=flat&logo=clojure&logoColor=fff" alt="Clojure" /></a>
+<a href="https://clojurescript.org"><img src="https://img.shields.io/badge/ClojureScript-5881D8?style=flat&logo=clojure&logoColor=fff" alt="ClojureScript" /></a>
+<a href="https://leiningen.org"><img src="https://img.shields.io/badge/Leiningen-2D2D2D?style=flat" alt="Leiningen" /></a>
+
 Currently, Environ supports four sources, resolved in the following
 order:
 
