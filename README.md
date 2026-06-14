@@ -41,20 +41,20 @@ Add the core library to your dependencies.
 Leiningen (`project.clj`):
 
 ```clojure
-:dependencies [[net.clojars.savya/environ "1.4.1"]]
+:dependencies [[net.clojars.savya/environ "1.4.2"]]
 ```
 
 tools.deps (`deps.edn`):
 
 ```clojure
-net.clojars.savya/environ {:mvn/version "1.4.1"}
+net.clojars.savya/environ {:mvn/version "1.4.2"}
 ```
 
 If you want to be able to draw settings from the Leiningen project
 map, you'll also need the plugin:
 
 ```clojure
-:plugins [[net.clojars.savya/lein-environ "1.4.2"]]
+:plugins [[net.clojars.savya/lein-environ "1.4.3"]]
 ```
 
 > **Note:** the Boot plugin (`boot-environ`) is unmaintained and is not

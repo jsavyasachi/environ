@@ -1,3 +1,11 @@
+## environ 1.4.2 (2026-06-14)
+
+* Standardize README structure and badges (docs only).
+
+## lein-environ 1.4.3 (2026-06-14)
+
+* Standardize README structure and badges (docs only).
+
 ## lein-environ 1.4.2 (2026-06-11)
 
 * Add docstrings to the public `read-env`, `env-file`, and `hooks`. No code
