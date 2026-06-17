@@ -37,10 +37,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # ClojureScript 1.12's bundled closure-compiler needs JDK 21+; the cljs
+      # toolchain runs under a modern Clojure. The library's JDK-8 / Clojure-1.8
+      # floor is covered by the core-clj matrix, not here.
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '17'
+          java-version: '21'
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
@@ -52,7 +55,7 @@ jobs:
           path: ~/.m2/repository
           key: m2-${{ hashFiles('**/project.clj') }}
           restore-keys: m2-
-      - run: lein doo node test-nodejs once
+      - run: lein with-profile +clojure-1-12 doo node test-nodejs once
         working-directory: environ
 
   lein-environ:

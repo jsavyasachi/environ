@@ -6,7 +6,7 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.8.0"]]
   :global-vars {*warn-on-reflection* true}
-  :profiles {:provided {:dependencies [[org.clojure/clojurescript "1.11.132"]]}
+  :profiles {:provided {:dependencies [[org.clojure/clojurescript "1.12.145"]]}
              :clojure-1-10 {:dependencies [[org.clojure/clojure "1.10.3"]]}
              :clojure-1-11 {:dependencies [[org.clojure/clojure "1.11.4"]]}
              :clojure-1-12 {:dependencies [[org.clojure/clojure "1.12.0"]]}}
@@ -17,7 +17,8 @@
    "ci" ["do"
          ["clean"]
          ["test"]
-         ["doo" "node" "test-nodejs" "once"]]}
+         ;; cljs 1.12 toolchain needs Clojure 1.10+ (and JDK 21+)
+         ["with-profile" "+clojure-1-12" "doo" "node" "test-nodejs" "once"]]}
   :cljsbuild
   {:builds
    [{:id "test-nodejs"
