@@ -1,9 +1,9 @@
 # environ
 
-[![Clojars Project](https://img.shields.io/clojars/v/net.clojars.savya/environ.svg)](https://clojars.org/net.clojars.savya/environ)
-[![lein-environ](https://img.shields.io/clojars/v/net.clojars.savya/lein-environ.svg?label=lein-environ)](https://clojars.org/net.clojars.savya/lein-environ)
-[![cljdoc](https://cljdoc.org/badge/net.clojars.savya/environ)](https://cljdoc.org/d/net.clojars.savya/environ)
-[![lein-environ cljdoc](https://cljdoc.org/badge/net.clojars.savya/lein-environ)](https://cljdoc.org/d/net.clojars.savya/lein-environ/CURRENT)
+[![environ](https://img.shields.io/clojars/v/net.clojars.savya/environ.svg?label=environ)](https://clojars.org/net.clojars.savya/environ) [![environ cljdoc](https://cljdoc.org/badge/net.clojars.savya/environ)](https://cljdoc.org/d/net.clojars.savya/environ)
+
+[![lein-environ](https://img.shields.io/clojars/v/net.clojars.savya/lein-environ.svg?label=lein-environ)](https://clojars.org/net.clojars.savya/lein-environ) [![lein-environ cljdoc](https://cljdoc.org/badge/net.clojars.savya/lein-environ)](https://cljdoc.org/d/net.clojars.savya/lein-environ/CURRENT)
+
 [![test](https://github.com/jsavyasachi/environ/actions/workflows/test.yml/badge.svg)](https://github.com/jsavyasachi/environ/actions/workflows/test.yml)
 
 Environ is a Clojure library for managing environment settings from a
@@ -35,6 +35,12 @@ classpath if present (e.g. when produced by an external Boot task).
 
 
 ## Installation
+
+Environ ships as two artifacts:
+
+- `environ` is the runtime library your application code requires.
+- `lein-environ` is the Leiningen plugin that writes `.lein-env` from
+  `:env` entries in `project.clj` and profiles.
 
 Add the core library to your dependencies.
 
@@ -78,11 +84,14 @@ on the `environ.core/env` map.
   (env :database-url))
 ```
 
-The value of this key can be set in several different ways. The most
-common way during development is to use a local `profiles.clj` file in
-your project directory. This file contains a map with profiles that will
-be merged with the profiles specified in the standard `project.clj`, but
-can be kept out of version control and reserved for local development options.
+The value of this key can be set in several different ways. The
+`environ` library reads the value at runtime; when using Leiningen, the
+`lein-environ` plugin writes values from your Leiningen profiles into
+`.lein-env` first. The most common way during development is to use a
+local `profiles.clj` file in your project directory. This file contains
+a map with profiles that will be merged with the profiles specified in
+the standard `project.clj`, but can be kept out of version control and
+reserved for local development options.
 
 ```clojure
 {:dev  {:env {:database-url "jdbc:postgresql://localhost/dev"}}
