@@ -4,4 +4,4 @@
  :deps {}
  :aliases
  {;; ClojureScript provided for cljs consumers/builds.
-  :cljs {:extra-deps {org.clojure/clojurescript {:mvn/version "1.11.132"}}}}}
+  :cljs {:extra-deps {org.clojure/clojurescript {:mvn/version "1.12.145"}}}}}
