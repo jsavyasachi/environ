@@ -4,6 +4,10 @@
   :scm {:dir ".."}
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
+  :deploy-repositories [["clojars" {:url "https://repo.clojars.org"
+                                    :username :env/clojars_username
+                                    :password :env/clojars_password
+                                    :sign-releases false}]]
   :dependencies [[org.clojure/clojure "1.8.0"]]
   :global-vars {*warn-on-reflection* true}
   :profiles {:provided {:dependencies [[org.clojure/clojurescript "1.12.145"]]}
