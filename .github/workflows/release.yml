@@ -1,6 +1,8 @@
 name: release
 
-# Publishes to Clojars when a v* tag is pushed. The tag is the deliberate
+# Publishes to Clojars when a version tag is pushed. Tags name the module they
+# release: environ-1.4.2, lein-environ-1.4.3, or a bare 1.4.1 for both. The tag is
+# the deliberate
 # "this is worth a release" signal; nothing publishes on ordinary commits.
 # Two artifacts live here (environ + lein-environ) with independent versions,
 # so each is deployed only when its project.clj version is not yet on Clojars:
@@ -8,7 +10,7 @@ name: release
 # idempotent and stay green instead of 403-ing on a redeploy.
 on:
   push:
-    tags: ['v*']
+    tags: ['v*', 'environ-*', 'lein-environ-*', '[0-9]*']
   workflow_dispatch: {}   # manual run for testing
 
 permissions:
