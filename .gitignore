@@ -11,3 +11,4 @@ environ/.cljs_node_repl
 environ/out/
 .cpcache/
 .clj-kondo/.cache/
+release-notes.md
