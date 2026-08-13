@@ -79,9 +79,13 @@ jobs:
       - name: Extract release notes from CHANGELOG
         if: github.ref_type == 'tag'
         run: |
+          # Tags carry the module name: lein-environ-1.4.3, environ-1.4.2, or 1.4.1.
+          # Headings write the same thing with a space: "## lein-environ 1.4.3 (date)".
           VERSION="${GITHUB_REF_NAME#v}"
-          awk -v v="$VERSION" '
-            $0 ~ "^## (environ |lein-environ )?" v " " {found=1; next}
+          HEADING=$(printf '%s' "$VERSION" | sed -E 's/-([0-9])/ \1/')
+          PATTERN=$(printf '%s' "$HEADING" | sed 's/\./\\./g')
+          awk -v p="$PATTERN" '
+            $0 ~ "^## " p "( |$)" {found=1; next}
             found && /^## / {exit}
             found {print}
           ' CHANGELOG.md > release-notes.md
