@@ -1,7 +1,10 @@
 (ns environ.core-test
-  (:require #?(:cljs [goog.object :as obj])
+  (:require #?(:clj [clojure.java.io :as io])
+            #?(:cljs [goog.object :as obj])
             [clojure.test :refer [deftest is testing]]
-            [environ.core :as environ]))
+            [environ.core :as environ])
+  #?(:clj (:import (java.io ByteArrayInputStream)
+                   (java.net URL URLConnection URLStreamHandler))))
 
 #?(:cljs (def nodejs? (exists? js/require)))
 #?(:cljs (def fs (when nodejs? (js/require "fs"))))
@@ -26,6 +29,23 @@
 
 #?(:cljs (defn- spit [f data]
            (.writeFileSync fs f data)))
+
+#?(:clj
+   (defn- boot-env-resource [content]
+     (URL. nil "jar:boot-env!/.boot-env"
+           (proxy [URLStreamHandler] []
+             (openConnection [url]
+               (proxy [URLConnection] [url]
+                 (connect [])
+                 (getInputStream []
+                   (ByteArrayInputStream. (.getBytes content "UTF-8")))))))))
+
+#?(:clj
+   (deftest test-boot-env-from-classpath-resource
+     (testing ".boot-env is read from a non-file classpath resource"
+       (with-redefs [io/resource
+                     (constantly (boot-env-resource "{:boot-setting \"from-boot\"}"))]
+         (is (= "from-boot" (:boot-setting (environ/read-env))))))))
 
 (deftest test-env
   (if #?(:clj true :cljs nodejs?)

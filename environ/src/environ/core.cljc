@@ -43,9 +43,11 @@
                (into {}))))
 
 (defn- slurp-file [f]
-  #?(:clj (when-let [f (io/file f)]
-            (when (.exists f)
-              (slurp f)))
+  #?(:clj (cond
+            (instance? java.net.URL f) (slurp f)
+            :else (when-let [f (io/file f)]
+                    (when (.exists f)
+                      (slurp f))))
      :cljs (when ^js (.existsSync fs f)
              (str ^js (.readFileSync fs f)))))
 
