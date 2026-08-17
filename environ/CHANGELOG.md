@@ -1,3 +1,11 @@
+## [1.4.3] - 2026-08-17
+
+### Fixed
+
+- `slurp-file` reads Boot's `.boot-env` correctly: a URL source is slurped
+  directly instead of being coerced to a `File`, so Boot-provided configuration
+  loads.
+
 ## [1.4.2] - 2026-06-14
 
 * Standardize README structure and badges (docs only).
