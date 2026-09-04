@@ -1,6 +1,6 @@
 (defproject net.clojars.savya/environ "1.4.3"
   :description "Library for accessing environment variables"
-  :url "https://github.com/jsavyasachi/environ"
+  :url "https://github.com/savyalabs/environ"
   :scm {:dir ".."}
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
